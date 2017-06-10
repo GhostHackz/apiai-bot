@@ -1,0 +1,7 @@
+{
+	"name": "GhostHackzAI",
+	"description": "A fun bot to say facts about Google and its HQ!",
+	"repository": "https://github.com/GhostHackz/apiai-bot",
+	"logo": "https://node-js-sample.herokuapp.com/node.png",
+	"keywords": ["Facts", "Google", "Cats", "AI"]
+}
