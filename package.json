@@ -1,0 +1,17 @@
+{
+	"name": "GhostHackzAI",
+	"description": "A fun bot to say facts about Google and its HQ!",
+	"version": "0.0.1",
+	"private": true,
+	"license": "Apache Version 2.0",
+	"author": "GhostHackz <ghosthackz@pginteractive.ml> (http://pginteractive.ml)",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"apiai": "^2.0.7",
+		"actions-on-google": "^1.0.0",
+	}
+}
