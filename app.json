@@ -1,12 +1,12 @@
 {
 	"name": "GhostHackzAI",
-	"description": "A fun bot to say facts about Google and its HQ!",
+	"description": "A fun bot to generate silly names!",
 	"repository": "https://github.com/GhostHackz/apiai-bot",
 	"logo": "http://xvir.github.io/img/apiai.png",
 	"keywords": [
-		"facts",
-		"google",
-		"cats",
+		"generate",
+		"names",
+		"silly",
 		"ai"
 	],
 	"engines": {
