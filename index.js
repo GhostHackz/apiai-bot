@@ -1,25 +1,20 @@
 'use strict';
 
-const express = require('express');
-const bodyParser = require('body-parser');
+process.env.DEBUG = 'actions-on-google:*';
+const App = require('actions-on-google').ApiAiApp;
 
-const service = express();
-
-service.use(bodyParser.urlencoded({
-	extended: true
-}));
-
-service.use(bodyParser.json());
-
-service.post('/ga-webhook', function(req, res) {
-	var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Oops! Something went wrong, please try again!"
-	return res.json({
-		speech: speech,
-		displayText: speech,
-		source: 'GhostHackzAI'
-	});
-});
-
-service.listen((process.env.PORT || 5000), function() {
-	console.log("Server is running and listening your request!");
-});
+exports.aiManagementSystem = (request, response) => {
+	const app = new App({request, response});
+	console.log('Request headers: ' + JSON.stringify(request.headers));
+	console.log('Request body: ' + JSON.stringify(request.body));
+	
+	function aiAction(app) {
+		app.ask('Hello, World!');
+	}
+	
+	const actionMap = new Map();
+	actionMap.set('sample.action', aiAction);
+	
+	app.handleRequest(actionMap);
+};
+	
