@@ -1,25 +1,25 @@
 'use strict';
 
-process.env.DEBUG = 'actions-on-google:*';
-const App = require('actions-on-google').ApiAiApp;
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const NAME_ACTION = 'make_name';
-const COLOR_ARGUMENT = 'color';
-const NUMBER_ARGUMENT = 'number';
+const service = express();
 
-exports.mainThread = (request, response) => {
-	const app = new App({request, response});
-	console.log('Request headers: ' + JSON.stringify(request.headers));
-	console.log('Request body: ' + JSON.stringify(request.body));
+service.use(bodyParser.urlencoded({
+	extended: true
+}));
 
-	function makeName(app) {
-		let number = app.getArgument(NUMBER_ARGUMENT);
-		let color = app.getArgument(COLOR_AURGUMENT);
-		app.tell('Alright your silly name is ' + color + ' ' + number + '! I hope you like it. See you next time.');
-	}
+service.use(bodyParser.json());
 
-	let actionMap = new Map();
-	actionMap.set(NAME_ACTION, makeName);
+service.post('/ga-webhook', function(req, res) {
+	var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Oops! Something went wrong, please try again!"
+	return res.json({
+		speech: speech,
+		displayText: speech,
+		source: 'GhostHackzAI'
+	});
+});
 
-	app.handleRequest(actionMap);
-};
+service.listen((process.env.PORT || 5000), function() {
+	console.log("Server is running and listening your request!");
+});
