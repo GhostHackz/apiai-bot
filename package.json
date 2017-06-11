@@ -1,19 +1,14 @@
 {
 	"name": "GhostHackzAI",
-	"description": "A fun bot to generate silly names!",
-	"version": "0.0.1",
-	"private": true,
-	"license": "Apache Version 2.0",
-	"author": "GhostHackz <ghosthackz@pginteractive.ml> (http://pginteractive.ml)",
-	"engines": {
-		"node": "~4.2"
-	},
+	"version": "1.0.0",
+	"description": "A funny bot to echo your speech!",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "node index.js"
 	},
+	"author": "Ghost Hackz <ghosthackz@pginteractive.ml> (http://pginteractive.ml)",
 	"dependencies": {
-		"actions-on-google": "^1.0.0"
+		"body-parser": "^1.15.0",
+		"express": "^4.13.4"
 	}
 }
