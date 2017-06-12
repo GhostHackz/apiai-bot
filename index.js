@@ -5,7 +5,6 @@ const App = require('actions-on-google').ApiAiApp;
 
 const express = require('express');
 const parser = require('body-parser');
-const date-time = require('node-datetime');
 
 const service = express();
 
