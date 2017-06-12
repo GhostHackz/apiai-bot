@@ -25,7 +25,7 @@ service.post('/ai-management-system', function(request, response) {
 	}
 	
 	function aiDate(app) {
-		const date = date-time.create();
+		var date = date-time.create();
 		date.format('Y-m-d H:M:S');
 		
 		app.tell(new Date(date.now()));
