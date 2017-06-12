@@ -8,10 +8,6 @@ const parser = require('body-parser');
 
 const service = express();
 
-service.use(parser.urlencoded({
-	extended: true
-}));
-
 service.use(parser.json());
 
 const CAT_SOUND = 'https://actions.google.com/sounds/v1/animals/cat_purr_close.ogg';
@@ -24,18 +20,18 @@ service.post('/ai-management-system', function(request, response) {
 	console.log('Request body: ' + JSON.stringify(request.body));
 	
 	function catSound(app) {
-		let catSpeech = 'Alright, here\'s a cat sound.<audio src="${CAT_SOUND}"></audio>';
-		app.ask('<speak>${catSpeech}</speak>');
+		let catSpeech = 'Alright, here\'s a cat sound. <audio src="${CAT_SOUND}"></audio>';
+		app.ask(app.buildRichResponse().addSimpleResponse('<speak>${catSpeech}</speak>'));
 	}
 	
 	function dogSound(app) {
-		let dogSpeech = 'Alright, here\'s a dog sound.<audio src="${DOG_SOUND}"></audio>';
-		app.ask('<speak>${dogSpeech}</speak>');
+		let dogSpeech = 'Alright, here\'s a dog sound. <audio src="${DOG_SOUND}"></audio>';
+		app.ask(app.buildRichResponse().addSimpleResponse('<speak>${dogSpeech}</speak>'));
 	}
 	
 	function mouseSound(app) {
-		let mouseSpeech = 'Alright, here\'s a mouse sound.<audio src="${MOUSE_SOUND}"></audio>';
-		app.ask('<speak>${mouseSpeech}</speak>');
+		let mouseSpeech = 'Alright, here\'s a mouse sound. <audio src="${MOUSE_SOUND}"></audio>';
+		app.ask(app.buildRichResponse().addSimpleResponse('<speak>${mouseSpeech}</speak>'));
 	}
 	
 	const actionMap = new Map();
