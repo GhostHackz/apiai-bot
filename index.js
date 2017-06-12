@@ -5,6 +5,7 @@ const App = require('actions-on-google').ApiAiApp;
 
 const express = require('express');
 const parser = require('body-parser');
+const date-time = require('node-datetime');
 
 const service = express();
 
@@ -23,8 +24,16 @@ service.post('/ai-management-system', function(request, response) {
 		app.ask('Hey! How are you?');
 	}
 	
+	function aiDate(app) {
+		const date = date-time.create();
+		date.format('Y-m-d H:M:S');
+		
+		app.tell(new Date(date.now()));
+	}
+	
 	const actionMap = new Map();
 	actionMap.set('ai.greet', aiGreet);
+	actionMap.set('ai.date', aiDate);
 	
 	app.handleRequest(actionMap);
 });
