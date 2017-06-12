@@ -3,18 +3,32 @@
 process.env.DEBUG = 'actions-on-google:*';
 const App = require('actions-on-google').ApiAiApp;
 
-exports.aiManagementSystem = (request, response) => {
+const express = require('express');
+const parser = require('body-parser');
+
+const service = express();
+
+service.use(parser.urlencoded({
+	extended: true
+}));
+
+service.use(parser.json());
+
+service.post('/ai-management-system', function(request, response) {
 	const app = new App({request, response});
 	console.log('Request headers: ' + JSON.stringify(request.headers));
 	console.log('Request body: ' + JSON.stringify(request.body));
 	
-	function aiAction(app) {
-		app.ask('Hello, World!');
+	function aiGreet(app) {
+		app.ask('Hey! How are you?');
 	}
 	
 	const actionMap = new Map();
-	actionMap.set('sample.action', aiAction);
+	actionMap.set('ai.greet', aiGreet);
 	
 	app.handleRequest(actionMap);
-};
-	
+});
+
+service.listen((process.env.PORT || 5000), function() {
+	console.log("Server is up and running!");
+});
