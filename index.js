@@ -123,9 +123,9 @@ service.post('/ai-processing-system', function(request, response) {
 	
 	function unhandledDeepLinks(app) {
 		if (app.hasSurfaceCapability(app.SurfaceCapabilities.SCREEN_OUTPUT)) {
-			app.ask(app.buildRichResponse().addSimpleResponse('Welcome to GhostHackzAI! I would really rather not talk about ${app.getRawInput()}. Would not you rather talk about Google? I can tell you about its history or its headquarters. Which one do you want to hear about?').addSuggestions(['History', 'Headquarters']), NO_INPUTS);
+			app.ask(app.buildRichResponse().addSimpleResponse('Welcome to GhostHackzAI! I would really rather not talk about ' + app.getRawInput() + '. Would not you rather talk about Google? I can tell you about its history or its headquarters. Which one do you want to hear about?').addSuggestions(['History', 'Headquarters']), NO_INPUTS);
 		} else {
-			app.ask('Welcome to GhostHackzAI! I would really rather not talk about ${app.getRawInput()}. Would not you rather talk about Google? I can tell you about its history or its headquarters. Which one do you want to hear about?', NO_INPUTS);
+			app.ask('Welcome to GhostHackzAI! I would really rather not talk about ' + app.getRawInput() + '. Would not you rather talk about Google? I can tell you about its history or its headquarters. Which one do you want to hear about?', NO_INPUTS);
 		}
 	}
 	
@@ -212,11 +212,11 @@ service.post('/ai-processing-system', function(request, response) {
 		}
 		
 		app.data.catFacts = Array.from(catFacts);
-		let factPrefix = 'Alright, here is a cat fact. <audio src="${MEOW_SRC}"></audio>';
+		let factPrefix = 'Alright, here is a cat fact. <audio src="' + MEOW_SRC + '"></audio>';
 		if (app.hasSurfaceCapability(app.SurfaceCapabilities.SCREEN_OUTPUT)) {
-			app.ask(app.buildRichResponse().addSimpleResponse('<speak>${factPrefix}</speak>').addBasicCard(app.buildBasicCard(fact).setImage(CAT_IMAGE[0], CAT_IMAGE[1]).addButton(LINK_OUT_TEXT, CATS_LINK)).addSimpleResponse(NEXT_FACT_DIRECTIVE).addSuggestions(CONFIRMATION_SUGGESTIONS), NO_INPUTS);
+			app.ask(app.buildRichResponse().addSimpleResponse('<speak>' + factPrefix + '</speak>').addBasicCard(app.buildBasicCard(fact).setImage(CAT_IMAGE[0], CAT_IMAGE[1]).addButton(LINK_OUT_TEXT, CATS_LINK)).addSimpleResponse(NEXT_FACT_DIRECTIVE).addSuggestions(CONFIRMATION_SUGGESTIONS), NO_INPUTS);
 		} else {
-			app.ask('<speak>${factPrefix} ${fact} ${NEXT_FACT_DIRECTIVE}</speak>', NO_INPUTS);
+			app.ask('<speak>' + factPrefix + ' ' + fact + ' ' + NEXT_FACT_DIRECTIVE + '</speak>', NO_INPUTS);
 		}
 		return;
 	}
@@ -226,7 +226,7 @@ service.post('/ai-processing-system', function(request, response) {
 		parameters[CATEGORY_ARGUMENT] = redirectCategory;
 		
 		app.setContext(FACTS_CONTEXT, DEFAULT_LIFESPAN, parameters);
-		let response = 'Looks like you have heard all there is to know about the ${currentCategory} of Google. I could tell you about its ${redirectCategory} instead.';
+		let response = 'Looks like you have heard all there is to know about the ' + currentCategory + ' of Google. I could tell you about its ' + redirectCategory + ' instead.';
 		if (!app.data.catFacts || app.data.catFacts.length > 0) {
 			response += 'By the way, I can tell you about cats too.';
 		}
