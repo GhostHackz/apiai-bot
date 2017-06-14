@@ -17,8 +17,10 @@ const keys = require('./keys');
 const Twitter = new TwitterPackage(keys);
 
 service.post('/twitter-webhook', function(request, response) {
-	const tweet = tweet-text;
-	response.send(true);
+	const tweet = request.tweetText;
+	if (tweet) {
+		response.send(true);
+	}
 	
 	Twitter.post('statuses/update', {status: tweet}, function(error, tweet, response) {
 		if (error) {
